@@ -457,7 +457,7 @@ watch(user, (newUser) => {
   position: absolute;
   top: 100%;
   left: 0;
-  background: #ff0000 !important; /* ← ROJO PARA IDENTIFICAR CAMBIOS - VERCEL TEST */
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -541,7 +541,7 @@ watch(user, (newUser) => {
 /* Forzar estilos específicos para el dropdown - Mayor especificidad */
 .navbar .dropdown-menu .dropdown-item {
   color: var(--gray-700) !important;
-  background: #ff0000 !important; /* ← ROJO PARA IDENTIFICAR CAMBIOS */
+  background: var(--gray-50) !important;
   padding: 0.75rem 1rem !important;
 }
 
@@ -553,7 +553,7 @@ watch(user, (newUser) => {
 /* Forzar estilos para router-link dentro del dropdown */
 .navbar .dropdown-menu .dropdown-item.router-link {
   color: var(--gray-700) !important;
-  background: #ff0000 !important; /* ← ROJO PARA IDENTIFICAR CAMBIOS */
+  background: var(--gray-50) !important;
   padding: 0.75rem 1rem !important;
 }
 
