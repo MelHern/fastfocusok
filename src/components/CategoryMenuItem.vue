@@ -86,7 +86,7 @@ const handleMouseEnter = () => {
 const handleMouseLeave = () => {
   setTimeout(() => {
     isHovered.value = false
-  }, 100)
+  }, 200) // Aumentado para mejor UX
 }
 
 
@@ -95,61 +95,81 @@ const handleMouseLeave = () => {
 <style scoped>
 .dropdown-category {
   position: relative !important;
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
 }
 
 .dropdown-category:last-child {
   border-bottom: none;
 }
 
+.dropdown-category:hover {
+  background: rgba(59, 130, 246, 0.03);
+}
+
 .dropdown-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1rem;
+  padding: 0.875rem 1.25rem;
   color: var(--gray-700);
   text-decoration: none;
   font-size: 0.875rem;
-  transition: var(--transition-fast);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   border-left: 3px solid transparent;
   white-space: nowrap;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
+  border-radius: 8px;
+  margin: 0.125rem 0.5rem;
 }
 
 /* Estilos por nivel dinámicos */
 .dropdown-item-level-0 {
   font-weight: 600;
   color: var(--gray-800);
-  background: var(--gray-50);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(59, 130, 246, 0.02) 100%);
+}
+
+.dropdown-item-level-0::before {
+  content: '📁';
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
 }
 
 .dropdown-item-level-1 {
   font-weight: 500;
-  color: var(--gray-600);
-  padding-left: 1.5rem;
+  color: var(--gray-700);
+  padding-left: 2rem;
   position: relative;
+  background: transparent;
 }
 
 .dropdown-item-level-1::before {
-  content: '';
+  content: '→';
   position: absolute;
   left: 0.75rem;
   color: var(--gray-400);
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
 }
 
 .dropdown-item-level-2 {
   font-weight: 500;
   color: var(--gray-600);
-  padding-left: 2.5rem;
+  padding-left: 2.75rem;
   position: relative;
+  background: transparent;
 }
 
 .dropdown-item-level-2::before {
-  content: '';
+  content: '→';
   position: absolute;
-  left: 1.75rem;
+  left: 1.5rem;
   color: var(--gray-400);
+  font-size: 0.7rem;
+  transition: all 0.2s ease;
 }
 
 .dropdown-item-level-3 {
@@ -157,56 +177,72 @@ const handleMouseLeave = () => {
   color: var(--gray-600);
   padding-left: 3.5rem;
   position: relative;
+  background: transparent;
 }
 
 .dropdown-item-level-3::before {
-  content: '';
+  content: '→';
   position: absolute;
-  left: 2.75rem;
+  left: 2.25rem;
   color: var(--gray-400);
+  font-size: 0.65rem;
+  transition: all 0.2s ease;
 }
 
 .dropdown-item-level-4 {
   font-weight: 500;
   color: var(--gray-600);
-  padding-left: 4.5rem;
+  padding-left: 4.25rem;
   position: relative;
+  background: transparent;
 }
 
 .dropdown-item-level-4::before {
-  content: '';
+  content: '→';
   position: absolute;
-  left: 3.75rem;
+  left: 3rem;
   color: var(--gray-400);
+  font-size: 0.65rem;
+  transition: all 0.2s ease;
 }
 
 .dropdown-item-level-5 {
   font-weight: 500;
   color: var(--gray-600);
-  padding-left: 5.5rem;
+  padding-left: 5rem;
   position: relative;
+  background: transparent;
 }
 
 .dropdown-item-level-5::before {
-  content: '';
+  content: '→';
   position: absolute;
-  left: 4.75rem;
+  left: 3.75rem;
   color: var(--gray-400);
+  font-size: 0.65rem;
+  transition: all 0.2s ease;
 }
 
 /* Hover effects */
 .dropdown-category:hover .dropdown-item {
-  background: var(--primary-blue-50);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
   color: var(--primary-blue);
   border-left-color: var(--primary-blue);
-  transform: translateX(4px);
+  transform: translateX(6px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.dropdown-category:hover .dropdown-item::before {
+  color: var(--primary-blue);
+  transform: translateX(2px);
 }
 
 .dropdown-item.router-link-active {
-  background: var(--primary-blue-100);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
   color: var(--primary-blue);
   border-left-color: var(--primary-blue);
   font-weight: 600;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
 }
 
 .dropdown-item-container {
@@ -216,28 +252,46 @@ const handleMouseLeave = () => {
   width: 100%;
 }
 
+.category-name {
+  flex: 1;
+  transition: all 0.2s ease;
+}
+
+.dropdown-category:hover .category-name {
+  font-weight: 600;
+}
+
 .dropdown-arrow-right {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--gray-400);
-  transition: var(--transition-fast);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   margin-left: 0.5rem;
   cursor: pointer;
-  padding: 0.25rem;
-  border-radius: 4px;
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .dropdown-arrow-right.expanded {
   transform: rotate(90deg);
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--primary-blue);
 }
 
 .dropdown-arrow-right:hover {
-  background: var(--gray-100);
+  background: rgba(59, 130, 246, 0.2);
   color: var(--primary-blue);
+  transform: scale(1.1);
 }
 
 .dropdown-category:hover .dropdown-arrow-right {
   color: var(--primary-blue);
-  transform: translateX(2px);
+  background: rgba(59, 130, 246, 0.1);
 }
 
 /* Submenús por nivel */
@@ -245,15 +299,21 @@ const handleMouseLeave = () => {
   position: absolute;
   top: 0;
   left: 100%;
-  background: linear-gradient(145deg, #ffffff 0%, var(--gray-50) 100%);
-  border: 2px solid var(--gray-200);
-  border-radius: var(--border-radius-xl);
-  box-shadow: var(--shadow-xl);
-  min-width: 200px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 
+              0 8px 24px rgba(59, 130, 246, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  min-width: 240px;
+  max-width: 320px;
   z-index: 1001;
   overflow: visible;
   padding: 0.5rem 0;
-  margin-left: 4px;
+  margin-left: 8px;
+  animation: submenuSlideIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 
@@ -296,6 +356,17 @@ const handleMouseLeave = () => {
 
 .dropdown-submenu-level-10 {
   z-index: 1010;
+}
+
+@keyframes submenuSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }
 
 /* Responsive */

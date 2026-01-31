@@ -121,7 +121,7 @@ const handleMouseEnter = () => {
 const handleMouseLeave = () => {
   leaveTimeout = setTimeout(() => {
     showDropdown.value = false
-  }, 500) // 500ms de delay
+  }, 300) // 300ms de delay para mejor UX
 }
 
 // Cerrar dropdown
@@ -418,11 +418,12 @@ watch(user, (newUser) => {
   cursor: pointer;
   padding: 0.75rem 1.25rem;
   border-radius: 12px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   background: transparent;
   width: 100%;
   min-width: 120px;
+  user-select: none;
 }
 
 .dropdown-trigger:hover {
@@ -440,64 +441,82 @@ watch(user, (newUser) => {
 }
 
 .dropdown-arrow {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--primary-blue);
 }
 
 .dropdown-arrow.rotated {
   transform: rotate(180deg);
+  background: rgba(59, 130, 246, 0.2);
 }
 
 .dropdown-container:hover .dropdown-arrow {
   transform: rotate(180deg);
+  background: rgba(59, 130, 246, 0.2);
 }
 
 .dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  min-width: 200px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 
+              0 8px 24px rgba(59, 130, 246, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  min-width: 280px;
+  max-width: 400px;
   z-index: 1000;
   overflow: visible;
-  animation: dropdownFadeIn 0.2s ease-out;
-  margin-top: 0.25rem;
+  animation: dropdownFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
 }
 
 .dropdown-loading {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem 1rem;
   color: var(--gray-600);
   font-size: 0.875rem;
 }
 
 .dropdown-loading .loading-spinner {
-  width: 16px;
-  height: 16px;
-  border: 2px solid var(--gray-200);
-  border-top: 2px solid var(--primary-blue);
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(59, 130, 246, 0.1);
+  border-top: 3px solid var(--primary-blue);
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 0.8s linear infinite;
 }
 
 .dropdown-empty {
-  padding: 0.75rem 1rem;
+  padding: 2rem 1rem;
   color: var(--gray-500);
   font-size: 0.875rem;
   text-align: center;
   font-style: italic;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  margin: 0.5rem;
 }
 
 .dropdown-content {
-  padding: 0.25rem 0;
+  padding: 0.5rem 0;
   overflow: visible;
 }
 
@@ -637,11 +656,11 @@ watch(user, (newUser) => {
 @keyframes dropdownFadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-15px) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -725,12 +744,12 @@ watch(user, (newUser) => {
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    min-width: 180px;
-    max-width: 280px;
+    min-width: 240px;
+    max-width: 320px;
     z-index: 1001;
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
     width: auto;
-    border-radius: 8px;
+    border-radius: 12px;
   }
   
   .dropdown-submenu {
@@ -819,9 +838,9 @@ watch(user, (newUser) => {
   }
   
   .dropdown-menu {
-    min-width: 160px;
+    min-width: 200px;
     max-width: 85vw;
-    border-radius: 6px;
+    border-radius: 12px;
   }
 }
 </style>
