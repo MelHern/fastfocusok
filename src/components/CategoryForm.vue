@@ -160,7 +160,7 @@ const handleSubmit = () => {
   const data = {
     name: formData.value.name.trim(),
     description: formData.value.description.trim(),
-    parentId: formData.value.parentId || undefined
+    parentId: formData.value.parentId === '' ? '' : (formData.value.parentId || undefined)
   }
 
   emit('save', data)

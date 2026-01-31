@@ -102,11 +102,11 @@ export function useCategories() {
       updatedAt: new Date()
     }
     
-    // Solo agregar parentId si no es undefined
+    // Manejar parentId: si es string vacío o undefined, eliminar el campo (poner null)
     if (data.parentId !== undefined && data.parentId !== '') {
       updateData.parentId = data.parentId
-    } else if (data.parentId === '') {
-      // Si es string vacío, eliminar el campo parentId
+    } else {
+      // Si es string vacío o undefined, eliminar el campo parentId (poner null)
       updateData.parentId = null
     }
     
